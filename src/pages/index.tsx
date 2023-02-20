@@ -1,11 +1,12 @@
 import Hero from "@/components/Hero"
+import Image from "next/image"
 
 interface TProps {
   data: {
     dates: Object
     results: {
       backdrop_path: string,
-      original_title: string
+      title: string
     }[]
   }
 }
@@ -23,17 +24,31 @@ export const getStaticProps = async () => {
 function Home({ data }: TProps) {
 
   const { results } = data
-  console.log(results[0])
-
+  console.log(results.slice(1, 4))
 
   return (
     <>
-      <div>
+      <div className="flex flex-col md:flex-row justify-center gap-20">
 
         <Hero
           imgPath={results[0].backdrop_path}
-          title={results[0].original_title}
+          title={results[0].title}
         />
+
+        <div className="flex flex-col gap-4">
+
+          {results.slice(1, 4).map(({ title, backdrop_path }) => {
+            return <Image
+              key={title}
+              src={`https://www.themoviedb.org/t/p/w533_and_h300_bestv2${backdrop_path}`}
+              width={1024}
+              height={1024}
+              className="w-[60rem] h-[8.3rem] object-cover"
+              alt={title}
+            />
+          })}
+
+        </div>
 
       </div>
     </>
