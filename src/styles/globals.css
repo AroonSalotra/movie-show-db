@@ -5,7 +5,7 @@
 :root {
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
+  /* text-align: center; */
   background-color: rgb(30, 33, 68);
   color: white;
 }

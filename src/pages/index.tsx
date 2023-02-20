@@ -1,13 +1,20 @@
-// https://api.themoviedb.org/3/movie/255/credits?api_key=69d8ac520e1633b4aa0732b04ccb0ce3
+import Hero from "@/components/Hero"
 
-type TProps = {
-  data: Array<object>
+interface TProps {
+  data: {
+    dates: Object
+    results: {
+      backdrop_path: string,
+      original_title: string
+    }[]
+  }
 }
 
-
 export const getStaticProps = async () => {
-  const apiLink = "https://api.themoviedb.org/3/movie/255/credits?api_key=69d8ac520e1633b4aa0732b04ccb0ce3"
-  const res = await fetch(apiLink)
+  const key = "api_key=69d8ac520e1633b4aa0732b04ccb0ce3"
+  const params = "/movie/now_playing?"
+
+  const res = await fetch(`https://api.themoviedb.org/3${params + key}&language=en-US&page=1`)
   const data = await res.json()
 
   return { props: { data: data } }
@@ -15,12 +22,19 @@ export const getStaticProps = async () => {
 
 function Home({ data }: TProps) {
 
-  console.log(data)
+  const { results } = data
+  console.log(results[0])
+
 
   return (
     <>
       <div>
-        <h1 className="text-lg font-bold">Hello!</h1>
+
+        <Hero
+          imgPath={results[0].backdrop_path}
+          title={results[0].original_title}
+        />
+
       </div>
     </>
   )
