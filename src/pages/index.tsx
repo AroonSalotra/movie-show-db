@@ -1,5 +1,6 @@
 import Background from "@/components/Background"
 import Hero from "@/components/Hero"
+import Trending from "@/components/Trending"
 import Image from "next/image"
 
 interface TProps {
@@ -36,7 +37,7 @@ function Home({ data }: TProps) {
           title={results[0].title}
         />
 
-        <div className="flex flex-col gap-4">
+        {/* <div className="flex flex-col gap-4">
 
           {results.slice(1, 4).map(({ title, backdrop_path }) => {
             return <Image
@@ -49,7 +50,13 @@ function Home({ data }: TProps) {
             />
           })}
 
-        </div>
+        </div> */}
+
+        <Trending
+          data={results}
+          start={1}
+          end={4}
+        />
 
       </div>
 
