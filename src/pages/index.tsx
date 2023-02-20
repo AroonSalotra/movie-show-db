@@ -1,7 +1,7 @@
 import Background from "@/components/Background"
 import Hero from "@/components/Hero"
+import Popular from "@/components/Popular"
 import Trending from "@/components/Trending"
-import Image from "next/image"
 
 interface TProps {
   data: {
@@ -13,10 +13,10 @@ interface TProps {
   }
 }
 
-export const getStaticProps = async () => {
-  const key = "api_key=69d8ac520e1633b4aa0732b04ccb0ce3"
-  const params = "/movie/now_playing?"
+const key = "api_key=69d8ac520e1633b4aa0732b04ccb0ce3"
 
+export const getStaticProps = async () => {
+  const params = "/movie/now_playing?"
   const res = await fetch(`https://api.themoviedb.org/3${params + key}&language=en-US&page=1`)
   const data = await res.json()
 
@@ -37,21 +37,6 @@ function Home({ data }: TProps) {
           title={results[0].title}
         />
 
-        {/* <div className="flex flex-col gap-4">
-
-          {results.slice(1, 4).map(({ title, backdrop_path }) => {
-            return <Image
-              key={title}
-              src={`https://www.themoviedb.org/t/p/w533_and_h300_bestv2${backdrop_path}`}
-              width={1024}
-              height={1024}
-              className="w-[60rem] h-[8.3rem] object-cover"
-              alt={title}
-            />
-          })}
-
-        </div> */}
-
         <Trending
           data={results}
           start={1}
@@ -59,6 +44,10 @@ function Home({ data }: TProps) {
         />
 
       </div>
+
+      <Popular
+        key={key}
+      />
 
       <Background />
     </>
