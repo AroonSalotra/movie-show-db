@@ -1,3 +1,4 @@
+import Background from "@/components/Background"
 import Hero from "@/components/Hero"
 import Image from "next/image"
 
@@ -28,7 +29,7 @@ function Home({ data }: TProps) {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-center gap-20">
+      <div className="flex flex-col md:flex-row justify-center gap-20 app">
 
         <Hero
           imgPath={results[0].backdrop_path}
@@ -51,6 +52,8 @@ function Home({ data }: TProps) {
         </div>
 
       </div>
+
+      <Background />
     </>
   )
 }
