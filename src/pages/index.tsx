@@ -13,9 +13,9 @@ interface TProps {
   }
 }
 
-const key = "api_key=69d8ac520e1633b4aa0732b04ccb0ce3"
-
 export const getStaticProps = async () => {
+
+  const key = process.env.NEXT_PUBLIC_KEY
   const params = "/movie/now_playing?"
   const res = await fetch(`https://api.themoviedb.org/3${params + key}&language=en-US&page=1`)
   const data = await res.json()
@@ -23,10 +23,11 @@ export const getStaticProps = async () => {
   return { props: { data: data } }
 }
 
+
+
 function Home({ data }: TProps) {
 
   const { results } = data
-  console.log(results.slice(1, 4))
 
   return (
     <>
@@ -46,7 +47,6 @@ function Home({ data }: TProps) {
       </div>
 
       <Popular
-        key={key}
       />
 
       <Background />
